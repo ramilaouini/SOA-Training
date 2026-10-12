@@ -69,5 +69,15 @@ public class ModuleRestAPI {
         }
         return Response.status(404).build();
     }
+    @Path("/{matricule}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getModuleByMatricule(@PathParam("matricule") String matricule) {
+        Module m = mb.getModuleByMatricule(matricule);
+        if (m != null) {
+            return Response.status(200).entity(m).build();
+        }
+        return Response.status(404).build();
+    }
     }
 
