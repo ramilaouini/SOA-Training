@@ -90,5 +90,15 @@ public class ModuleRestAPI {
             return Response.status(400).entity("invalid type").build();
         }
     }
+    @Path("/ue")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getModulesByUE(@QueryParam("code") int code) {
+        UniteEnseignement ue = ueb.getUEByCode(code);
+        if (ue == null) {
+            return Response.status(404).build();
+        }
+        return Response.status(200).entity(mb.getModulesByUE(ue)).build();
+    }
     }
 
