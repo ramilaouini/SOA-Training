@@ -79,5 +79,16 @@ public class ModuleRestAPI {
         }
         return Response.status(404).build();
     }
+    @Path("/type")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getModulesByType(@QueryParam("type") String type) {
+        try {
+            Module.TypeModule t = Module.TypeModule.valueOf(type.toUpperCase());
+            return Response.status(200).entity(mb.getModulesByType(t)).build();
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return Response.status(400).entity("invalid type").build();
+        }
+    }
     }
 
